@@ -12,7 +12,7 @@ class MenuState extends FlxState
 	override public function create()
 	{
 		var titleText:FlxText = new FlxText(0, 0, 0, "The Simple Math Game", 12);
-        titleText.setFormat("assets/vcr.ttf", 64, FlxColor.WHITE, FlxTextAlign.CENTER,FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+        	titleText.setFormat("assets/vcr.ttf", 64, FlxColor.WHITE, FlxTextAlign.CENTER,FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		titleText.screenCenter(X);
 		add(titleText);
 
@@ -37,11 +37,6 @@ class MenuState extends FlxState
 		hardBtn.scale.set(2, 2);
 		hardBtn.screenCenter(X);
 		add(hardBtn);
-
-		var versionShit:FlxText = new FlxText(5, FlxG.height - 24, 0, "v" + Application.current.meta.get('version'), 12);
-		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(versionShit);
 
 		FlxG.camera.fade(FlxColor.BLACK, 0.33, true);
 
