@@ -39,11 +39,11 @@ class PlayState extends FlxState
         add(math);
 
         input = new FlxUIInputText(10, 10, FlxG.width, '', 8);
-		input.setFormat("assets/vcr.ttf", 96, FlxColor.WHITE, FlxTextAlign.CENTER);
-		input.alignment = CENTER;
-		input.setBorderStyle(OUTLINE, 0xFF000000, 5, 1);
-		input.screenCenter();
-		input.y += 50;
+	input.setFormat("assets/vcr.ttf", 96, FlxColor.WHITE, FlxTextAlign.CENTER);
+	input.alignment = CENTER;
+	input.setBorderStyle(OUTLINE, 0xFF000000, 5, 1);
+	input.screenCenter();
+	input.y += 50;
         input.scrollFactor.set();
         input.backgroundColor = 0xFF000000;
         input.maxLength = 15;
