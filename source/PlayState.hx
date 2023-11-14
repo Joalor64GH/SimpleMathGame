@@ -20,7 +20,7 @@ class PlayState extends FlxState
 
     var randomNum1:Int;
     var randomNum2:Int;
-    var symbol:Array<String> = ['+', '-', '*', '/'];
+    var symbol:String = "+-*/";
 
     // i have no idea how to make these work
     var correctAnswer:String;
@@ -85,7 +85,7 @@ class PlayState extends FlxState
 
         var string = '';
         for (i in symbol)
-            string = FlxG.random.int(0, i.length - 1);
+            string += FlxG.random.int(0, i.length - 1);
         return string;
 
         math.text = randomNum1 + symbol + randomNum2;
