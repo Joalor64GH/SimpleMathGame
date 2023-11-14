@@ -7,6 +7,8 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.addons.ui.FlxUIInputText;
 
+using StringTools;
+
 class PlayState extends FlxState
 {
     var input:FlxUIInputText;
