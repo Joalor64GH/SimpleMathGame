@@ -107,7 +107,7 @@ class PlayState extends FlxState
 
         randomSymbol();
 
-        math.text = randomNum1 + symbol + randomNum2;
+        math.text = 'What is ' + '$randomNum1 $symbol $randomNum2' + ' ?';
         input.text = '';
     }
 
