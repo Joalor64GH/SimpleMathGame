@@ -20,13 +20,22 @@ class PlayState extends FlxState
 
     var randomNum1:Int;
     var randomNum2:Int;
-    var symbol:String = "+-*/";
+    var symbol:Array<String> = ['+', '-', '*', '/'];
+
+    var difficulty:Int = 0;
 
     // i have no idea how to make these work
     var correctAnswer:String;
 
     var correct:Bool;
     var incorrect:Bool;
+
+    public function new(diff:Int)
+    {
+        super();
+        
+        difficulty = diff;
+    }
 
     override public function create()
     {
@@ -76,19 +85,36 @@ class PlayState extends FlxState
         {
             randomMath();
         }
+
+        if (FlxG.keys.justPressed.ESCAPE)
+        {
+            FlxG.switchState(new MenuState());
+        }
     }
 
     function randomMath()
     {
-        randomNum1 = FlxG.random.int(0, 10);
-        randomNum2 = FlxG.random.int(0, 10);
+        if (difficulty == 1)
+        {
+            randomNum1 = FlxG.random.int(0, 20);
+            randomNum2 = FlxG.random.int(0, 20);
+        }
+        else if (difficulty == 0)
+        {
+            randomNum1 = FlxG.random.int(0, 10);
+            randomNum2 = FlxG.random.int(0, 10);
+        }
 
-        var string = '';
-        for (i in symbol)
-            string += FlxG.random.int(0, i.length - 1);
-        return string;
+        randomSymbol();
 
         math.text = randomNum1 + symbol + randomNum2;
         input.text = '';
+    }
+
+    function randomSymbol()
+    {
+        var chance:Int = FlxG.random.int(0, symbol.length - 1);
+        var str:String = symbol[chance];
+        return str;
     }
 }
