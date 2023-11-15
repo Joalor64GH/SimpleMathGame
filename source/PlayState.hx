@@ -33,7 +33,6 @@ class PlayState extends FlxState
     public function new(diff:Int)
     {
         super();
-        
         difficulty = diff;
     }
 
@@ -51,11 +50,10 @@ class PlayState extends FlxState
 	input.setFormat("assets/vcr.ttf", 96, FlxColor.WHITE, FlxTextAlign.CENTER);
 	input.alignment = CENTER;
 	input.setBorderStyle(OUTLINE, 0xFF000000, 5, 1);
-	input.screenCenter();
+	input.screenCenter(XY);
 	input.y += 50;
         input.scrollFactor.set();
         input.backgroundColor = 0xFF000000;
-        input.maxLength = 15;
         input.lines = 1;
         input.caretColor = 0xFFFFFFFF;
         add(input);
@@ -71,6 +69,8 @@ class PlayState extends FlxState
         FlxG.camera.fade(FlxColor.BLACK, 0.33, true);
 
         FlxG.mouse.visible = true;
+
+	randomMath();
 
         super.create();
     }
