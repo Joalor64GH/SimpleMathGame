@@ -5,6 +5,7 @@ import flixel.FlxState;
 import flixel.FlxSprite;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import flixel.util.FlxTimer;
 import flixel.addons.ui.FlxUIInputText;
 
 using StringTools;
@@ -15,20 +16,12 @@ class PlayState extends FlxState
 
     var math:FlxText;
 
-    var green:FlxSprite;
-    var red:FlxSprite;
-
     var randomNum1:Int;
     var randomNum2:Int;
-    var symbol:Array<String> = ['+', '-', '*', '/'];
+    var correctAnswer:Int;
+    var operator:String;
 
     var difficulty:Int = 0;
-
-    // i have no idea how to make these work
-    var correctAnswer:String;
-
-    var correct:Bool;
-    var incorrect:Bool;
 
     public function new(diff:Int)
     {
@@ -41,7 +34,7 @@ class PlayState extends FlxState
         var bg:FlxSprite = new FlxSprite().makeGraphic(1280, 720, FlxColor.BLACK);
         add(bg);
 
-        math = new FlxText(0, 0, 0, '', 12);
+        math = new FlxText(0, 0, FlxG.width, 'Press SPACE to start.', 12);
         math.setFormat("assets/vcr.ttf", 64, FlxColor.WHITE, FlxTextAlign.CENTER,FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
         math.screenCenter(X);
         add(math);
@@ -52,25 +45,14 @@ class PlayState extends FlxState
 	input.setBorderStyle(OUTLINE, 0xFF000000, 5, 1);
 	input.screenCenter(XY);
 	input.y += 50;
-        input.scrollFactor.set();
         input.backgroundColor = 0xFF000000;
         input.lines = 1;
         input.caretColor = 0xFFFFFFFF;
         add(input);
 
-        green = new FlxSprite().makeGraphic(1280, 720, FlxColor.GREEN);
-        green.alpha = 0;
-        add(green);
-
-        red = new FlxSprite().makeGraphic(1280, 720, FlxColor.RED);
-        red.alpha = 0;
-        add(red);
-
         FlxG.camera.fade(FlxColor.BLACK, 0.33, true);
 
         FlxG.mouse.visible = true;
-
-	randomMath();
 
         super.create();
     }
@@ -83,7 +65,12 @@ class PlayState extends FlxState
 
         if (FlxG.keys.justPressed.ENTER && input.text != '')
         {
-            randomMath();
+            checkAnswer();
+        }
+
+        if (FlxG.keys.justPressed.SPACE)
+        {
+            generateQuestion();
         }
 
         if (FlxG.keys.justPressed.ESCAPE)
@@ -92,7 +79,7 @@ class PlayState extends FlxState
         }
     }
 
-    function randomMath()
+    function generateQuestion()
     {
         if (difficulty == 1)
         {
@@ -105,16 +92,29 @@ class PlayState extends FlxState
             randomNum2 = FlxG.random.int(0, 10);
         }
 
-        randomSymbol();
+        operator = FlxG.random.bool(50) ? '+' : '-';
 
-        math.text = 'What is ' + '$randomNum1 $symbol $randomNum2' + ' ?';
+        correctAnswer = operator == '+' ? randomNum1 + randomNum2 : randomNum1 - randomNum2;
+
+        math.text = 'What is ' + '$randomNum1 $operator $randomNum2' + ' ?';
         input.text = '';
     }
 
-    function randomSymbol()
+    function checkAnswer()
     {
-        var chance:Int = FlxG.random.int(0, symbol.length - 1);
-        var str:String = symbol[chance];
-        return str;
+        var userAnswer:Int = Std.parseInt(input.text);
+
+        if (userAnswer == correctAnswer)
+        {
+            FlxG.camera.flash(FlxColor.GREEN, 2);
+            math.text = 'Correct!';
+        }
+        else
+        {
+            FlxG.camera.flash(FlxColor.RED, 2);
+            math.text = 'Wrong!';
+        }
+
+        new FlxTimer().start(4, generateQuestion, 0);
     }
 }
