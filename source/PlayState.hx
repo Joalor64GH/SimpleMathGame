@@ -81,16 +81,8 @@ class PlayState extends FlxState
 
     function generateQuestion()
     {
-        if (difficulty == 1)
-        {
-            randomNum1 = FlxG.random.int(0, 20);
-            randomNum2 = FlxG.random.int(0, 20);
-        }
-        else if (difficulty == 0)
-        {
-            randomNum1 = FlxG.random.int(0, 10);
-            randomNum2 = FlxG.random.int(0, 10);
-        }
+        randomNum1 = FlxG.random.int(0, difficulty == 1 ? 20 : 10);
+        randomNum2 = FlxG.random.int(0, difficulty == 1 ? 20 : 10);
 
         symbol = FlxG.random.bool(50) ? '+' : '-';
 
@@ -115,6 +107,9 @@ class PlayState extends FlxState
             math.text = 'Wrong!';
         }
 
-        new FlxTimer().start(4, generateQuestion, 0);
+        new FlxTimer().start(4, function(tmr:FlxTimer)
+	{
+		generateQuestion();
+	}, 0);
     }
 }
