@@ -19,7 +19,7 @@ class PlayState extends FlxState
     var randomNum1:Int;
     var randomNum2:Int;
     var correctAnswer:Int;
-    var operator:String;
+    var symbol:String;
 
     var difficulty:Int = 0;
 
@@ -92,11 +92,11 @@ class PlayState extends FlxState
             randomNum2 = FlxG.random.int(0, 10);
         }
 
-        operator = FlxG.random.bool(50) ? '+' : '-';
+        symbol = FlxG.random.bool(50) ? '+' : '-';
 
-        correctAnswer = operator == '+' ? randomNum1 + randomNum2 : randomNum1 - randomNum2;
+        correctAnswer = symbol == '+' ? randomNum1 + randomNum2 : randomNum1 - randomNum2;
 
-        math.text = 'What is ' + '$randomNum1 $operator $randomNum2' + ' ?';
+        math.text = 'What is ' + '$randomNum1 $symbol $randomNum2' + ' ?';
         input.text = '';
     }
 
