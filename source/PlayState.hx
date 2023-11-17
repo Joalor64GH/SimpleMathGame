@@ -16,7 +16,7 @@ class PlayState extends FlxState
 
     var math:FlxText;
 
-    var randomNum1:Int;
+    var randomNum1:Float;
     var randomNum2:Int;
     var correctAnswer:Float;
     var symbol:String;
