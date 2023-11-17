@@ -39,7 +39,7 @@ class PlayState extends FlxState
     override public function create()
     {
         var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('background'));
-		add(bg);
+	add(bg);
 
         math = new FlxText(0, 0, FlxG.width, 'Press SPACE to start.', 12);
         math.setFormat(Paths.font('vcr.ttf'), 64, FlxColor.WHITE, FlxTextAlign.CENTER,FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
@@ -58,14 +58,14 @@ class PlayState extends FlxState
         add(input);
 
         var scoreTxt:FlxText = new FlxText(5, FlxG.height - 24, 0, 'Score: $score', 12);
-		scoreTxt.scrollFactor.set();
-		scoreTxt.setFormat(Paths.font('vcr.ttf'), 26, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(scoreTxt);
+	scoreTxt.scrollFactor.set();
+	scoreTxt.setFormat(Paths.font('vcr.ttf'), 26, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+	add(scoreTxt);
 
         timeTxt = new FlxText(5, FlxG.height - 44, 0, '', 12);
-		timeTxt.scrollFactor.set();
-		timeTxt.setFormat(Paths.font('vcr.ttf'), 26, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(timeTxt);
+	timeTxt.scrollFactor.set();
+	timeTxt.setFormat(Paths.font('vcr.ttf'), 26, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+	add(timeTxt);
 
         if (timed == true)
         {
