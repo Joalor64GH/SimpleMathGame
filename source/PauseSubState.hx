@@ -19,28 +19,28 @@ class PauseSubState extends FlxSubState
         add(bg);
 
         var titleText:FlxText = new FlxText(0, 0, 0, "PAUSED?", 12);
-        	titleText.setFormat("assets/vcr.ttf", 60, FlxColor.WHITE, FlxTextAlign.CENTER,FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
-		titleText.screenCenter(X);
-		add(titleText);
+        titleText.setFormat("assets/vcr.ttf", 60, FlxColor.WHITE, FlxTextAlign.CENTER,FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+	titleText.screenCenter(X);
+	add(titleText);
 
-		var resumeBtn:FlxButton = new FlxButton(0, FlxG.height / 2 + 50, "Resume", function() 
-		{
+	var resumeBtn:FlxButton = new FlxButton(0, FlxG.height / 2 + 50, "Resume", function() 
+	{
             close();
-        	});
-		resumeBtn.scale.set(2, 2);
-		resumeBtn.screenCenter(X);
-		add(resumeBtn);
+        });
+	resumeBtn.scale.set(2, 2);
+	resumeBtn.screenCenter(X);
+	add(resumeBtn);
 
-		var menuBtn:FlxButton = new FlxButton(0, resumeBtn.y + 70, "Menu", function() 
-		{
-            	    FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
-		    {
-			FlxG.switchState(new MenuState());
-		    });
-        	});
-		menuBtn.scale.set(2, 2);
-		menuBtn.screenCenter(X);
-		add(menuBtn);
+	var menuBtn:FlxButton = new FlxButton(0, resumeBtn.y + 70, "Menu", function() 
+	{
+            FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
+	    {
+	        FlxG.switchState(new MenuState());
+	    });
+        });
+	menuBtn.scale.set(2, 2);
+	menuBtn.screenCenter(X);
+	add(menuBtn);
     }
 
     override public function update(elapsed:Float)
