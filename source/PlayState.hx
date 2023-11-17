@@ -3,7 +3,6 @@ package;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.FlxSprite;
-import flixel.FlxSubState;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
@@ -65,12 +64,12 @@ class PlayState extends FlxState
 
         timeTxt = new FlxText(5, FlxG.height - 44, 0, '', 12);
 		timeTxt.scrollFactor.set();
-		timeTxt.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		timeTxt.setFormat(Paths.font('vcr.ttf'), 26, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(timeTxt);
 
         if (timed == true)
         {
-            timeLeft = difficulty == 1 ? 60 : 120;
+            timeLeft = 120;
         }
 
         FlxG.camera.fade(FlxColor.BLACK, 0.33, true);
@@ -92,16 +91,21 @@ class PlayState extends FlxState
         if (FlxG.keys.justPressed.SPACE)
         {
             generateQuestion();
-
-            if (timed == true)
-            {
-                updateTime();
-            }
         }
 
         if (FlxG.keys.justPressed.ESCAPE)
         {
-            openSubState(new PauseSubState());
+            FlxG.switchState(new MenuState());
+        }
+
+        if (FlxG.keys.justPressed.BACKSPACE)
+        {
+            FlxG.switchState(new GameOverState(score));
+        }
+
+        if (timed == true)
+        {
+            updateTime();
         }
     }
 
@@ -145,13 +149,13 @@ class PlayState extends FlxState
         {
             FlxG.camera.flash(FlxColor.GREEN, 1);
             math.text = 'Correct!';
-            score += 1;
+            score++;
         }
         else
         {
             FlxG.camera.flash(FlxColor.RED, 1);
             math.text = 'Wrong!';
-            score -= 1;
+            score--;
         }
 
         new FlxTimer().start(3, function(tmr:FlxTimer)
@@ -162,9 +166,9 @@ class PlayState extends FlxState
 
     function updateTime()
     {
-        timeLeft -= 1;
+        timeLeft--;
 
-        if (timeLeft <= 0)
+        if (timeLeft == 0)
         {
             FlxG.switchState(new GameOverState(score));
         }

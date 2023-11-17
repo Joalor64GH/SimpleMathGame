@@ -2,7 +2,6 @@ package;
 
 import flixel.FlxG;
 import flixel.FlxState;
-import flixel.FlxSprite;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.ui.FlxButton;
@@ -22,9 +21,6 @@ class GameOverState extends FlxState
     override public function create()
     {
         super.create();
-
-        var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('background'));
-		add(bg);
 
         var text:FlxText = new FlxText(0, 0, FlxG.width, 'Game Over!\nYour final score is $finalScore' + '.\nGood Job!', 12);
         text.setFormat(Paths.font('vcr.ttf'), 64, FlxColor.WHITE, FlxTextAlign.CENTER,FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
