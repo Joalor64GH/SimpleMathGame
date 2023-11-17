@@ -14,6 +14,8 @@ class PlayState extends FlxState
 {
     public var score:Int = 0;
 
+    var scoreTxt:FlxText;
+
     var input:FlxUIInputText;
 
     var math:FlxText;
@@ -57,7 +59,7 @@ class PlayState extends FlxState
         input.caretColor = 0xFFFFFFFF;
         add(input);
 
-        var scoreTxt:FlxText = new FlxText(5, FlxG.height - 24, 0, 'Score: $score', 12);
+        scoreTxt = new FlxText(5, FlxG.height - 24, 0, 'Score: $score', 12);
 	scoreTxt.scrollFactor.set();
 	scoreTxt.setFormat(Paths.font('vcr.ttf'), 26, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 	add(scoreTxt);
@@ -98,7 +100,7 @@ class PlayState extends FlxState
             FlxG.switchState(new MenuState());
         }
 
-        if (FlxG.keys.justPressed.BACKSPACE)
+        if (FlxG.keys.justPressed.E) // end game
         {
             FlxG.switchState(new GameOverState(score));
         }
@@ -149,13 +151,15 @@ class PlayState extends FlxState
         {
             FlxG.camera.flash(FlxColor.GREEN, 1);
             math.text = 'Correct!';
-            score++;
+            updateScore('Score: $score');
+            score += 1;
         }
         else
         {
             FlxG.camera.flash(FlxColor.RED, 1);
             math.text = 'Wrong!';
-            score--;
+            updateScore('Score: $score');
+            score -= 1;
         }
 
         new FlxTimer().start(3, function(tmr:FlxTimer)
@@ -166,7 +170,7 @@ class PlayState extends FlxState
 
     function updateTime()
     {
-        timeLeft--;
+        timeLeft -= 1;
 
         if (timeLeft == 0)
         {
@@ -174,5 +178,9 @@ class PlayState extends FlxState
         }
 
         timeTxt.text = 'Time Left: $timeLeft';
+    }
+
+    function updateScore(points:String):Void {
+	scoreTxt.text = points;
     }
 }
