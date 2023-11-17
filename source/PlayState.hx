@@ -167,7 +167,6 @@ class PlayState extends FlxState
         if (timeLeft <= 0)
         {
             FlxG.switchState(new GameOverState(score));
-            break;
         }
 
         timeTxt.text = 'Time Left: $timeLeft';

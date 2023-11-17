@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxState;
 import flixel.FlxSprite;
 import flixel.text.FlxText;
+import flixel.util.FlxColor;
 import flixel.ui.FlxButton;
 
 import PlayState;
@@ -15,7 +16,6 @@ class GameOverState extends FlxState
     public function new(total:Int)
     {
         super();
-
         finalScore = total;
     }
 

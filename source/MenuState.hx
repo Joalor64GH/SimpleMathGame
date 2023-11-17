@@ -56,7 +56,7 @@ class MenuState extends FlxState
 		{
             FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
 	    	{
-	        	FlxG.switchState(new MenuState(1, true));
+	        	FlxG.switchState(new PlayState(1, true));
 	    	});
         });
 		hardTimed.scale.set(2, 2);

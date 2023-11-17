@@ -10,6 +10,9 @@ import flixel.ui.FlxButton;
 // pause substate i guess
 class PauseSubState extends FlxSubState
 {
+    var resumeBtn:FlxButton;
+    var menuBtn:FlxButton;
+
     public function new()
     {
         super();
@@ -19,11 +22,11 @@ class PauseSubState extends FlxSubState
         add(bg);
 
         var titleText:FlxText = new FlxText(0, resumeBtn.y - 120, 0, "PAUSED?", 12);
-        titleText.setFormat("assets/vcr.ttf", 60, FlxColor.WHITE, FlxTextAlign.CENTER,FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+        titleText.setFormat(Paths.font('vcr.ttf'), 60, FlxColor.WHITE, FlxTextAlign.CENTER,FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 	titleText.screenCenter(X);
 	add(titleText);
 
-	var resumeBtn:FlxButton = new FlxButton(0, FlxG.height / 2 + 50, "Resume", function() 
+	resumeBtn = new FlxButton(0, FlxG.height / 2 + 50, "Resume", function() 
 	{
             close();
         });
@@ -31,7 +34,7 @@ class PauseSubState extends FlxSubState
 	resumeBtn.screenCenter(X);
 	add(resumeBtn);
 
-	var menuBtn:FlxButton = new FlxButton(0, resumeBtn.y + 70, "Menu", function() 
+	menuBtn = new FlxButton(0, resumeBtn.y + 70, "Menu", function() 
 	{
             FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
 	    {
