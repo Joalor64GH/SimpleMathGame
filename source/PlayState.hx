@@ -18,7 +18,7 @@ class PlayState extends FlxState
 
     var randomNum1:Int;
     var randomNum2:Int;
-    var correctAnswer:Int;
+    var correctAnswer:Float;
     var symbol:String;
 
     var difficulty:Int = 0;
@@ -91,21 +91,17 @@ class PlayState extends FlxState
             case 1: // addition
                 correctAnswer = randomNum1 + randomNum2;
                 symbol = '+';
-                break;
             case 2: // subtraction
                 correctAnswer = randomNum1 - randomNum2;
                 symbol = '-';
-                break;
             case 3: // multiplication
                 correctAnswer = randomNum1 * randomNum2;
                 symbol = '*';
-                break;
             case 4: // division
                 correctAnswer = randomNum1 * randomNum2;
                 randomNum1 = correctAnswer; // swap for division
                 correctAnswer = randomNum1 / randomNum2;
                 symbol = '/';
-                break;
         }
 
         math.text = 'What is ' + '$randomNum1 $symbol $randomNum2' + ' ?';
