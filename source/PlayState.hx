@@ -3,6 +3,7 @@ package;
 import flixel.FlxG;
 import flixel.FlxState;
 import flixel.FlxSprite;
+import flixel.FlxSubState;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
@@ -26,14 +27,12 @@ class PlayState extends FlxState
     public function new(diff:Int)
     {
         super();
+        
         difficulty = diff;
     }
 
     override public function create()
     {
-        var bg:FlxSprite = new FlxSprite().makeGraphic(1280, 720, FlxColor.BLACK);
-        add(bg);
-
         math = new FlxText(0, 0, FlxG.width, 'Press SPACE to start.', 12);
         math.setFormat("assets/vcr.ttf", 64, FlxColor.WHITE, FlxTextAlign.CENTER,FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
         math.screenCenter(X);
@@ -75,7 +74,7 @@ class PlayState extends FlxState
 
         if (FlxG.keys.justPressed.ESCAPE)
         {
-            FlxG.switchState(new MenuState());
+            openSubState(new PauseSubState());
         }
     }
 
