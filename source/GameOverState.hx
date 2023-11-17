@@ -28,15 +28,15 @@ class GameOverState extends FlxState
         add(text);
 
         var menuBtn:FlxButton = new FlxButton(0, FlxG.height / 2 + 50, "Menu", function() 
-		{
+	{
             FlxG.camera.fade(FlxColor.BLACK, 0.33, false, function() 
-	    	{
-	        	FlxG.switchState(new MenuState());
-	    	});
+	    {
+	        FlxG.switchState(new MenuState());
+	    });
         });
-		menuBtn.scale.set(2, 2);
-		menuBtn.screenCenter(X);
-		add(menuBtn);
+	menuBtn.scale.set(2, 2);
+	menuBtn.screenCenter(X);
+	add(menuBtn);
     }
 
     override public function update(elapsed:Float)
