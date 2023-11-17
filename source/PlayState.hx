@@ -84,9 +84,29 @@ class PlayState extends FlxState
         randomNum1 = FlxG.random.int(0, difficulty == 1 ? 20 : 10);
         randomNum2 = FlxG.random.int(0, difficulty == 1 ? 20 : 10);
 
-        symbol = FlxG.random.bool(50) ? '+' : '-';
+        var chance:Int = FlxG.random.int(1, 4);
 
-        correctAnswer = symbol == '+' ? randomNum1 + randomNum2 : randomNum1 - randomNum2;
+        switch (chance)
+        {
+            case 1: // addition
+                correctAnswer = randomNum1 + randomNum2;
+                symbol = '+';
+                break;
+            case 2: // subtraction
+                correctAnswer = randomNum1 - randomNum2;
+                symbol = '-';
+                break;
+            case 3: // multiplication
+                correctAnswer = randomNum1 * randomNum2;
+                symbol = '*';
+                break;
+            case 4: // division
+                correctAnswer = randomNum1 * randomNum2;
+                randomNum1 = correctAnswer; // swap for division
+                correctAnswer = randomNum1 / randomNum2;
+                symbol = '/';
+                break;
+        }
 
         math.text = 'What is ' + '$randomNum1 $symbol $randomNum2' + ' ?';
         input.text = '';
@@ -94,22 +114,22 @@ class PlayState extends FlxState
 
     function checkAnswer()
     {
-        var userAnswer:Int = Std.parseInt(input.text);
+        var userAnswer:Int = Std.parseFloat(input.text);
 
         if (userAnswer == correctAnswer)
         {
-            FlxG.camera.flash(FlxColor.GREEN, 2);
+            FlxG.camera.flash(FlxColor.GREEN, 1);
             math.text = 'Correct!';
         }
         else
         {
-            FlxG.camera.flash(FlxColor.RED, 2);
+            FlxG.camera.flash(FlxColor.RED, 1);
             math.text = 'Wrong!';
         }
 
-        new FlxTimer().start(4, function(tmr:FlxTimer)
+        new FlxTimer().start(3, function(tmr:FlxTimer)
 	{
 		generateQuestion();
-	}, 0);
+	});
     }
 }
