@@ -110,7 +110,7 @@ class PlayState extends FlxState
 
     function checkAnswer()
     {
-        var userAnswer:Int = Std.parseFloat(input.text);
+        var userAnswer:Float = Std.parseFloat(input.text);
 
         if (userAnswer == correctAnswer)
         {
