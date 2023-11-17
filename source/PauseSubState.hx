@@ -18,7 +18,7 @@ class PauseSubState extends FlxSubState
         bg.alpha = 0.3;
         add(bg);
 
-        var titleText:FlxText = new FlxText(0, 0, 0, "PAUSED?", 12);
+        var titleText:FlxText = new FlxText(0, resumeBtn.y - 120, 0, "PAUSED?", 12);
         titleText.setFormat("assets/vcr.ttf", 60, FlxColor.WHITE, FlxTextAlign.CENTER,FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 	titleText.screenCenter(X);
 	add(titleText);

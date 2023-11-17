@@ -13,6 +13,8 @@ using StringTools;
 
 class PlayState extends FlxState
 {
+    public var score:Int = 0;
+
     var input:FlxUIInputText;
 
     var math:FlxText;
@@ -24,22 +26,29 @@ class PlayState extends FlxState
 
     var difficulty:Int = 0;
 
-    public function new(diff:Int)
+    var timed:Bool;
+    var timeLeft:Int;
+    var timeTxt:FlxText;
+
+    public function new(diff:Int, ?time:Bool)
     {
         super();
-        
         difficulty = diff;
+        timed = time;
     }
 
     override public function create()
     {
+        var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('background'));
+		add(bg);
+
         math = new FlxText(0, 0, FlxG.width, 'Press SPACE to start.', 12);
-        math.setFormat("assets/vcr.ttf", 64, FlxColor.WHITE, FlxTextAlign.CENTER,FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
+        math.setFormat(Paths.font('vcr.ttf'), 64, FlxColor.WHITE, FlxTextAlign.CENTER,FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
         math.screenCenter(X);
         add(math);
 
         input = new FlxUIInputText(10, 10, FlxG.width, '', 8);
-	input.setFormat("assets/vcr.ttf", 96, FlxColor.WHITE, FlxTextAlign.CENTER);
+	input.setFormat(Paths.font('vcr.ttf'), 96, FlxColor.WHITE, FlxTextAlign.CENTER);
 	input.alignment = CENTER;
 	input.setBorderStyle(OUTLINE, 0xFF000000, 5, 1);
 	input.screenCenter(XY);
@@ -49,9 +58,22 @@ class PlayState extends FlxState
         input.caretColor = 0xFFFFFFFF;
         add(input);
 
-        FlxG.camera.fade(FlxColor.BLACK, 0.33, true);
+        var scoreTxt:FlxText = new FlxText(5, FlxG.height - 24, 0, 'Score: $score', 12);
+		scoreTxt.scrollFactor.set();
+		scoreTxt.setFormat(Paths.font('vcr.ttf'), 26, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(scoreTxt);
 
-        FlxG.mouse.visible = true;
+        timeTxt = new FlxText(5, FlxG.height - 44, 0, '', 12);
+		timeTxt.scrollFactor.set();
+		timeTxt.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(timeTxt);
+
+        if (timed == true)
+        {
+            timeLeft = difficulty == 1 ? 60 : 120;
+        }
+
+        FlxG.camera.fade(FlxColor.BLACK, 0.33, true);
 
         super.create();
     }
@@ -70,6 +92,11 @@ class PlayState extends FlxState
         if (FlxG.keys.justPressed.SPACE)
         {
             generateQuestion();
+
+            if (timed == true)
+            {
+                updateTime();
+            }
         }
 
         if (FlxG.keys.justPressed.ESCAPE)
@@ -83,7 +110,7 @@ class PlayState extends FlxState
         randomNum1 = FlxG.random.int(0, difficulty == 1 ? 20 : 10);
         randomNum2 = FlxG.random.int(0, difficulty == 1 ? 20 : 10);
 
-        var chance:Int = FlxG.random.int(1, 4);
+        var chance:Int = FlxG.random.int(1, 5);
 
         switch (chance)
         {
@@ -101,6 +128,9 @@ class PlayState extends FlxState
                 randomNum1 = correctAnswer; // swap for division
                 correctAnswer = randomNum1 / randomNum2;
                 symbol = '/';
+            case 5: // exponentiation
+                correctAnswer = Math.pow(randomNum1, randomNum2);
+                symbol = '^';
         }
 
         math.text = 'What is ' + '$randomNum1 $symbol $randomNum2' + ' ?';
@@ -115,16 +145,31 @@ class PlayState extends FlxState
         {
             FlxG.camera.flash(FlxColor.GREEN, 1);
             math.text = 'Correct!';
+            score += 1;
         }
         else
         {
             FlxG.camera.flash(FlxColor.RED, 1);
             math.text = 'Wrong!';
+            score -= 1;
         }
 
         new FlxTimer().start(3, function(tmr:FlxTimer)
 	{
 		generateQuestion();
 	});
+    }
+
+    function updateTime()
+    {
+        timeLeft -= 1;
+
+        if (timeLeft <= 0)
+        {
+            FlxG.switchState(new GameOverState(score));
+            break;
+        }
+
+        timeTxt.text = 'Time Left: $timeLeft';
     }
 }
