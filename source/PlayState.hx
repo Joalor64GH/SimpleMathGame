@@ -34,6 +34,7 @@ class PlayState extends FlxState
     public function new(diff:Int, ?time:Bool)
     {
         super();
+	    
         difficulty = diff;
         timed = time;
     }
@@ -71,7 +72,7 @@ class PlayState extends FlxState
 
         if (timed == true)
         {
-            timeLeft = 120;
+            timeLeft = 120000; // two minutes
         }
 
         FlxG.camera.fade(FlxColor.BLACK, 0.33, true);
@@ -164,7 +165,7 @@ class PlayState extends FlxState
 
         new FlxTimer().start(3, function(tmr:FlxTimer)
 	{
-		generateQuestion();
+	    generateQuestion();
 	});
     }
 
@@ -180,7 +181,8 @@ class PlayState extends FlxState
         timeTxt.text = 'Time Left: $timeLeft';
     }
 
-    function updateScore(points:String):Void {
+    function updateScore(points:String):Void 
+    {
 	scoreTxt.text = points;
     }
 }
