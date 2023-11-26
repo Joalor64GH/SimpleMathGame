@@ -12,6 +12,7 @@ class MenuState extends FlxState
 	override public function create()
 	{
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('background'));
+		bg.screenCenter();
 		add(bg);
 
 		var titleText:FlxText = new FlxText(0, 0, 0, "The Simple Math Game", 12);
@@ -27,6 +28,8 @@ class MenuState extends FlxState
 		    });
         	});
 		easyBtn.scale.set(2, 2);
+		easyBtn.label.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		easyBtn.label.screenCenter(XY);
 		easyBtn.screenCenter(X);
 		add(easyBtn);
 
@@ -38,6 +41,8 @@ class MenuState extends FlxState
 		    });
         	});
 		hardBtn.scale.set(2, 2);
+		hardBtn.label.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		hardBtn.label.screenCenter(XY);
 		hardBtn.screenCenter(X);
 		add(hardBtn);
 
@@ -49,6 +54,8 @@ class MenuState extends FlxState
 	    	    });
                 });
 		easyTimed.scale.set(2, 2);
+		easyTimed.label.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		easyTimed.label.screenCenter(XY);
 		easyTimed.screenCenter(X);
 		add(easyTimed);
 
@@ -60,6 +67,8 @@ class MenuState extends FlxState
 	    	    });
                 });
 		hardTimed.scale.set(2, 2);
+		hardTimed.label.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		hardTimed.label.screenCenter(XY);
 		hardTimed.screenCenter(X);
 		add(hardTimed);
 
