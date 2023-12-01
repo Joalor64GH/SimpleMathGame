@@ -65,7 +65,7 @@ class PlayState extends FlxState
 	scoreTxt.setFormat(Paths.font('vcr.ttf'), 26, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 	add(scoreTxt);
 
-        timeTxt = new FlxText(5, FlxG.height - 44, 0, '', 12);
+        timeTxt = new FlxText(5, FlxG.height - 44, 0, 'You get 2 minutes to answer as many question as you can!', 12);
 	timeTxt.scrollFactor.set();
 	timeTxt.setFormat(Paths.font('vcr.ttf'), 26, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 	add(timeTxt);
@@ -106,10 +106,10 @@ class PlayState extends FlxState
             FlxG.switchState(new GameOverState(score));
         }
 
-        if (timed == true)
-        {
+	if (timed == true && FlxG.keys.justPressed.SPACE)
+	{
             updateTime();
-        }
+	}
     }
 
     function generateQuestion()
@@ -163,7 +163,7 @@ class PlayState extends FlxState
             score -= 1;
         }
 
-        new FlxTimer().start(3, function(tmr:FlxTimer)
+        new FlxTimer().start(2.5, function(tmr:FlxTimer)
 	{
 	    generateQuestion();
 	});
