@@ -35,8 +35,8 @@ class GameOverState extends FlxState
 	    });
         });
 	menuBtn.scale.set(2, 2);
-    menuBtn.label.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-    menuBtn.label.screenCenter(XY);
+        menuBtn.label.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+        menuBtn.label.screenCenter(XY);
 	menuBtn.screenCenter(X);
 	add(menuBtn);
     }
