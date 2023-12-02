@@ -109,6 +109,8 @@ class PlayState extends FlxState
 	if (timed == true && FlxG.keys.justPressed.SPACE)
 	{
             updateTime();
+	    
+	    timeLeft.update(elapsed);
 	}
     }
 
