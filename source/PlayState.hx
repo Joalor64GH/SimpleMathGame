@@ -31,12 +31,12 @@ class PlayState extends FlxState
     var timeLeft:Int;
     var timeTxt:FlxText;
 
-    public function new(diff:Int, ?time:Bool)
+    public function new(difficulty:Int, ?timed:Bool)
     {
         super();
 	    
-        difficulty = diff;
-        timed = time;
+        this.difficulty = difficulty;
+        this.timed = timed;
     }
 
     override public function create()
@@ -65,14 +65,15 @@ class PlayState extends FlxState
 	scoreTxt.setFormat(Paths.font('vcr.ttf'), 26, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 	add(scoreTxt);
 
-        timeTxt = new FlxText(5, FlxG.height - 44, 0, 'You get 2 minutes to answer as many question as you can!', 12);
+        timeTxt = new FlxText(5, FlxG.height - 44, 0, '', 12);
 	timeTxt.scrollFactor.set();
 	timeTxt.setFormat(Paths.font('vcr.ttf'), 26, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 	add(timeTxt);
 
         if (timed == true)
         {
-            timeLeft = 120000; // two minutes
+            timeTxt.text = 'You get 2 minutes to answer as many question as you can!';
+            timeLeft = 120000; // two minutes in milliseconds
         }
 
         FlxG.camera.fade(FlxColor.BLACK, 0.33, true);
@@ -87,31 +88,21 @@ class PlayState extends FlxState
         input.hasFocus = true;
 
         if (FlxG.keys.justPressed.ENTER && input.text != '')
-        {
             checkAnswer();
-        }
 
         if (FlxG.keys.justPressed.SPACE)
         {
             generateQuestion();
+
+            if (timed == true)
+                updateTime(elapsed);
         }
 
         if (FlxG.keys.justPressed.ESCAPE)
-        {
             FlxG.switchState(new MenuState());
-        }
 
-        if (FlxG.keys.justPressed.E) // end game
-        {
+        if (FlxG.keys.justPressed.END) // end game
             FlxG.switchState(new GameOverState(score));
-        }
-
-	if (timed == true && FlxG.keys.justPressed.SPACE)
-	{
-            updateTime();
-	    
-	    timeLeft.update(elapsed);
-	}
     }
 
     function generateQuestion()
@@ -153,14 +144,14 @@ class PlayState extends FlxState
         if (userAnswer == correctAnswer)
         {
             FlxG.camera.flash(FlxColor.GREEN, 1);
-            math.text = 'Correct!';
+            math.text = 'Correct!\nThat was the answer!';
             updateScore('Score: $score');
             score += 1;
         }
         else
         {
             FlxG.camera.flash(FlxColor.RED, 1);
-            math.text = 'Wrong!';
+            math.text = 'Wrong!\nThe answer was $correctAnswer!';
             updateScore('Score: $score');
             score -= 1;
         }
@@ -171,14 +162,12 @@ class PlayState extends FlxState
 	});
     }
 
-    function updateTime()
+    function updateTime(elapsed:Float = 1.0)
     {
-        timeLeft -= 1;
+        timeLeft -= elapsed;
 
         if (timeLeft == 0)
-        {
             FlxG.switchState(new GameOverState(score));
-        }
 
         timeTxt.text = 'Time Left: $timeLeft';
     }

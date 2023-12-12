@@ -53,7 +53,7 @@ class MenuState extends FlxState
 	                FlxG.switchState(new PlayState(0, true));
 	    	    });
                 });
-		easyTimed.scale.set(2, 2);
+		easyTimed.scale.set(3, 2);
 		easyTimed.label.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		easyTimed.label.screenCenter(XY);
 		easyTimed.screenCenter(X);
@@ -66,7 +66,7 @@ class MenuState extends FlxState
 	                FlxG.switchState(new PlayState(1, true));
 	    	    });
                 });
-		hardTimed.scale.set(2, 2);
+		hardTimed.scale.set(3, 2);
 		hardTimed.label.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		hardTimed.label.screenCenter(XY);
 		hardTimed.screenCenter(X);

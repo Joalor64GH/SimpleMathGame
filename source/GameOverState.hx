@@ -6,16 +6,14 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.ui.FlxButton;
 
-import PlayState;
-
 class GameOverState extends FlxState
 {
     var finalScore:Int;
 
-    public function new(total:Int)
+    public function new(finalScore:Int)
     {
         super();
-        finalScore = total;
+        this.finalScore = finalScore;
     }
 
     override public function create()
