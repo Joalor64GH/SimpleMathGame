@@ -162,7 +162,7 @@ class PlayState extends FlxState
 	});
     }
 
-    function updateTime(elapsed:Float = 1.0)
+    function updateTime(elapsed:Int = 1)
     {
         timeLeft -= elapsed;
 
