@@ -71,10 +71,7 @@ class PlayState extends FlxState
 	add(timeTxt);
 
         if (timed == true)
-        {
-            timeTxt.text = 'You get 2 minutes to answer as many question as you can!';
             timeLeft = 120000; // two minutes in milliseconds
-        }
 
         FlxG.camera.fade(FlxColor.BLACK, 0.33, true);
 
@@ -91,18 +88,16 @@ class PlayState extends FlxState
             checkAnswer();
 
         if (FlxG.keys.justPressed.SPACE)
-        {
             generateQuestion();
-
-            if (timed == true)
-                updateTime(elapsed);
-        }
 
         if (FlxG.keys.justPressed.ESCAPE)
             FlxG.switchState(new MenuState());
 
         if (FlxG.keys.justPressed.END) // end game
             FlxG.switchState(new GameOverState(score));
+
+	if (timed == true)
+	    updateTime();
     }
 
     function generateQuestion()
@@ -162,9 +157,9 @@ class PlayState extends FlxState
 	});
     }
 
-    function updateTime(elapsed:Int = 1)
+    function updateTime()
     {
-        timeLeft -= elapsed;
+        timeLeft -= 1;
 
         if (timeLeft == 0)
             FlxG.switchState(new GameOverState(score));
