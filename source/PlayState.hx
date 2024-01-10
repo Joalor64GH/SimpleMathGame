@@ -84,6 +84,8 @@ class PlayState extends FlxState
 
         input.hasFocus = true;
 
+        scoreTxt.text = 'Score: $score';
+
         if (FlxG.keys.justPressed.ENTER && input.text != '')
             checkAnswer();
 
@@ -140,14 +142,12 @@ class PlayState extends FlxState
         {
             FlxG.camera.flash(FlxColor.GREEN, 1);
             math.text = 'Correct!\nThat was the answer!';
-            updateScore('Score: $score');
             score += 1;
         }
         else
         {
             FlxG.camera.flash(FlxColor.RED, 1);
             math.text = 'Wrong!\nThe answer was $correctAnswer!';
-            updateScore('Score: $score');
             score -= 1;
         }
 
@@ -165,10 +165,5 @@ class PlayState extends FlxState
             FlxG.switchState(new GameOverState(score));
 
         timeTxt.text = 'Time Left: $timeLeft';
-    }
-
-    function updateScore(points:String):Void 
-    {
-	scoreTxt.text = points;
     }
 }

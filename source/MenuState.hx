@@ -54,7 +54,7 @@ class MenuState extends FlxState
 	    	    });
                 });
 		easyTimed.scale.set(3, 2);
-		easyTimed.label.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		easyTimed.label.setFormat(Paths.font('vcr.ttf'), 12, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		easyTimed.label.screenCenter(XY);
 		easyTimed.screenCenter(X);
 		add(easyTimed);
@@ -67,7 +67,7 @@ class MenuState extends FlxState
 	    	    });
                 });
 		hardTimed.scale.set(3, 2);
-		hardTimed.label.setFormat(Paths.font('vcr.ttf'), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		hardTimed.label.setFormat(Paths.font('vcr.ttf'), 12, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		hardTimed.label.screenCenter(XY);
 		hardTimed.screenCenter(X);
 		add(hardTimed);
